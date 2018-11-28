@@ -2,7 +2,9 @@ ifndef VERSION
 $(error VERSION must be supplied.  Don't include the 'v')
 endif
 
+ifndef ACCOUNT
 ACCOUNT = franzinc
+endif
 
 # Strip any '.rcN' or '.tN' from VERSION.
 FINAL_VERSION=$(shell echo $(VERSION) | sed -e 's/\.rc.*$$//' -e 's/\.t[0-9]$$//')
@@ -14,7 +16,6 @@ TGZ = agraph-$(FINAL_VERSION)-linuxamd64.64.tar.gz
 
 default: Dockerfile
 	docker build -t $(TAG) .
-	@if ./release-version-p $(VERSION); then docker tag $(TAG) $(LATEST_TAG); fi
 
 Dockerfile: FORCE
 	sed -e 's/__TGZ__/$(TGZ)/g' \
@@ -25,6 +26,6 @@ Dockerfile: FORCE
 # Unless you work at Franz, Inc you should ignore this rule:
 push: FORCE
 	docker push $(TAG)
-	docker push $(LATEST_TAG)
+	# docker push $(LATEST_TAG)
 
 FORCE:

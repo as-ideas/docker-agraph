@@ -1,3 +1,5 @@
 /Dockerfile
 *~
 
+# IDE related files
+*.iml

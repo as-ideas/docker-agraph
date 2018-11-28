@@ -5,7 +5,7 @@ MAINTAINER Franz Support <support@franz.com>
 RUN yum -y update
 RUN yum clean all
 
-RUN curl -f -o __TGZ__ http://franz.com/ftp/pri/acl/ag/ag__VERSION__/linuxamd64.64/__TGZ__
+RUN curl -f -o __TGZ__ https://franz.com/ftp/pri/acl/ag/ag__VERSION__/linuxamd64.64/__TGZ__
 RUN groupadd agraph \
     && useradd -d /data -g agraph agraph \
     && tar zxf __TGZ__ \
